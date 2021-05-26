@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.module.category" id="security_category_weather">
+    <field name="name">Weather</field>
+    <field name="description">Weather module users</field>
+  </record>
+
+  <record id="weather_user" model="res.groups">
+    <field name="name">Weather user</field>
+    <field name="category_id" ref="weather.security_category_weather" />
+    <field name="implied_ids" eval="[(4,ref('base.group_user'))]" />
+  </record>
+
+  <record id="weather_manager" model="res.groups">
+    <field name="name">Weather manager</field>
+    <field name="category_id" ref="weather.security_category_weather" />
+    <field name="implied_ids" eval="[(4,ref('weather.weather_user'))]" />
+  </record>
+
+</odoo>

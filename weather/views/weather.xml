@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="weather_weather_form_view" model="ir.ui.view">
+      <field name="name">weather.form</field>
+      <field name="model">city.weather</field>
+      <field name="arch" type="xml">
+        <form string="Add weather">
+          <header>
+            <field name="state" widget="statusbar" clickable="1" />
+          </header>
+          <sheet>
+            <group col="2" string="General">
+              <group>
+                <field name="city" />
+              </group>
+              <group>
+                <field name="date" />
+              </group>
+            </group>
+            <group col="2" string="Temperature">
+              <group>
+                <field name="temperature_c" />
+                <field name="temperature_f" />
+              </group>
+              <group>
+                <field name="uom_temperature_c" string="Unit of Measure" />
+                <field name="uom_temperature_f" string="Unit of Measure" />
+              </group>
+            </group>
+            <group string="Humidity">
+              <field name="humidity" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="weather_weather_tree_view">
+      <field name="name">weather.tree</field>
+      <field name="model">city.weather</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="state" invisible="True" />
+          <field name="city"/>
+          <field name="date"/>
+          <field name="humidity"/>
+          <field name="temperature_c" />
+          <field name="uom_temperature_c" string="UoM" />
+          <field name="temperature_f" />
+          <field name="uom_temperature_f" string="UoM" />
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="weather_weather_search_view">
+      <field name="name">weather.search</field>
+      <field name="model">city.weather</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="city" />
+          <field name="date" />
+          <group expand="0" string="Group By">
+            <filter name="city" context="{'group_by': 'city'}" />
+            <filter name="state" context="{'group_by': 'state'}" />
+          </group>
+          <filter name="temperature_minus" domain="[('temperature_c' ,'&lt;', 0)]" />
+          <filter name="temperature_plus" domain="[('temperature_c' ,'&gt;', 0)]" />
+        </search>
+      </field>
+    </record>
+
+
+    <!-- action opening views on models -->
+    <record model="ir.actions.act_window" id="weather_weather_act">
+      <field name="name">Weather</field>
+      <field name="res_model">city.weather</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
