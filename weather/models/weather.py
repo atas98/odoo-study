@@ -25,10 +25,6 @@ class Weather(models.Model):
     def _get_default_uom_temperature_f(self):
         return self.env.ref('weather.uom_fahrenheit').id
 
-    @api.model
-    def _get_default_uom_temperature_f(self):
-        return self.env.ref('weather.uom_fahrenheit').id
-
     city = fields.Many2one("res.city",
                            required=True,
                            index=True,
