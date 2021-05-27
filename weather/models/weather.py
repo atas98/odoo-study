@@ -13,7 +13,7 @@ class Weather(models.Model):
          'There can be only one weather obj for each city'),
         ('temperature_restrictions',
          'CHECK (temperature_c>=-80 AND temperature_c<=80)', 'Wrong temperature'),
-        ('temperature_restrictions',
+        ('humidity_restrictions',
          'CHECK (humidity>=0 AND humidity<=100)', 'Wrong humidity')
     ]
 
