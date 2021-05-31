@@ -15,7 +15,7 @@ from operator import itemgetter
 def min_keys(input_dict, length=3, reverse=True):
     return tuple(key
                  for key, _ in sorted(input_dict.items(),
-                                      key=lambda item: item[1],
+                                      key=itemgetter(1),    
                                       reverse=reverse)[:length])
 
 
