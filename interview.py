@@ -10,9 +10,12 @@ def sums(numbers, sum_positions=(3, 5, 9)):
 
 # Task 2
 # Return 3 keys with minimum value in decreasing order
+from operator import itemgetter
+
 def min_keys(input_dict, length=3, reverse=True):
-    return tuple(input_dict[key] 
-                    for key in sorted(input_dict.keys(), 
+    return tuple(key
+                 for key, _ in sorted(input_dict.items(),
+                                      key=lambda item: item[1],
                                       reverse=reverse)[:length])
 
 
@@ -22,5 +25,6 @@ if __name__ == "__main__":
     print(f'task #1: {sums(numbers)}')
 
     # Test task 2
-    input_dict = {i: f'Value-{i}' for i in range(20)}
+    input_dict = {i: 20-i for i in range(20)}
+    print(input_dict)
     print(f'task #2: {min_keys(input_dict)}')
