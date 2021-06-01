@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="weather_weather_menu_root"
+    name="Weather"
+    web_icon="weather,static/description/icon.png">
+    <menuitem id="weather_weather_menu_item"
+      name="Weather">
+      <menuitem id="weather_weather_menu_act"
+        name="Weather"
+        action="weather_weather_act" />
+    </menuitem>
+  </menuitem>
+
+</odoo>

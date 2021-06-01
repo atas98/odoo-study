@@ -28,8 +28,8 @@
 
     # always loaded
     'data': [
-        'wizard/upload_weather.xml', 'views/weather.xml',
-        'views/menuitems.xml', 'data/uom.xml', 'data/decimal_precision.xml',
+        'wizard/upload_weather_wizard.xml', 'views/city_weather.xml',
+        'views/city_weather_views.xml', 'data/uom.xml', 'data/decimal_precision.xml',
         'security/groups.xml', 'security/ir.model.access.csv'
     ],
     # only loaded in demonstration mode
