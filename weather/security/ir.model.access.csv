@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_weather_weather_user,Weather user,model_city_weather,weather.weather_user,1,0,0,0
 access_weather_weather_manager,Wearher manager,model_city_weather,weather.weather_manager,1,1,1,1
+access_upload_weather_manager,Weather manager,model_upload_weather_wizard,weather.weather_manager,1,1,1,1
+access_upload_weather_line_manager,Weather manager,model_upload_weather_wizard_line,weather.weather_manager,1,1,1,1
