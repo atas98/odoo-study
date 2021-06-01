@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.ui.view"
+    id="wizard_form_view">
+    <field name="name">upload.weather.wizard.form</field>
+    <field name="model">upload.weather.wizard</field>
+    <field name="arch"
+      type="xml">
+      <form string="Upload weather from csv file">
+        <field name="parsed"
+          invisible="True" />
+        <field name="uploaded"
+          invisible="True" />
+        <field name="weather_file_name"
+          invisible="True" />
+        <field name="weather_file"
+          filename="weather_file_name" />
+        <field name="weather_line_ids"
+          attrs="{'invisible':[('parsed', '=', False)]}" />
+        <footer>
+          <button string="Upload weather"
+            name="upload_weather"
+            type="object"
+            class="oe_highlight"
+            attrs="{'invisible': ['|', ('parsed', '!=', True),
+                                       ('uploaded', '=', True)]}" />
+          <button string="Parse data"
+            name="parse_weather_file"
+            type="object"
+            class="oe_highlight"
+            attrs="{'invisible':['|', ('weather_file', '=', False),
+                                      ('parsed', '=', True)]}" />
+          <button string="Ok"
+            name="close_window"
+            type="object"
+            class="oe_highlight"
+            attrs="{'invisible':[('uploaded', '!=', True)]}" />
+          <button string="Cancel"
+            special="cancel"
+            attrs="{'invisible':[('uploaded', '=', True)]}" />
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view"
+    id="wizard_lines_form_view">
+    <field name="name">upload.weather.line.wizard.tree</field>
+    <field name="model">upload.weather.wizard.line</field>
+    <field name="arch"
+      type="xml">
+      <tree decoration-danger="not can_load">
+        <field name="city_name" />
+        <field name="temperature_c" />
+        <field name="humidity" />
+        <field name="date" />
+        <field name="can_load"
+          invisible="True" />
+        <field name="error_description" />
+      </tree>
+    </field>
+
+  </record>
+
+  <act_window id="weather_upload_weather_wizard_act"
+    name="Upload file"
+    binding_model="city.weather"
+    res_model="upload.weather.wizard"
+    view_mode="form"
+    target="new" />
+
+  <menuitem id="weather_upload_wizard_menu_act"
+    parent="weather_weather_menu_item"
+    name="Upload data"
+    action="weather_upload_weather_wizard_act" />
+
+</odoo>

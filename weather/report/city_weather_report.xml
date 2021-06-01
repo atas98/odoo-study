@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="report_city_weather_view">
+    <t t-call="web.html_container">
+      <t t-call="web.external_layout">
+        <div class="page">
+          <h2>
+            <span t-esc="user.name" />
+          </h2>
+          <h3>
+            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m-%d-%Y')" />
+          </h3>
+          <table class="table table-condensed"
+            style="border: 3px;">
+            <thead>
+              <tr>
+                <th>City</th>
+                <th>Date</th>
+                <th>Temperature C</th>
+                <th>Temperature F</th>
+                <th>Humidity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="docs"
+                t-as="line">
+                <tr>
+                  <td>
+                    <span t-field="line.city.name" />
+                  </td>
+                  <td>
+                    <span t-field="line.date" />
+                  </td>
+                  <td>
+                    <span t-field="line.temperature_c" />
+                  </td>
+                  <td>
+                    <span t-field="line.temperature_f" />
+                  </td>
+                  <td>
+                    <span t-field="line.humidity" />
+                  </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+        </div>
+      </t>
+    </t>
+  </template>
+
+  <record id="city_weather_report"
+    model="ir.actions.report">
+    <field name="name">Weather report</field>
+    <field name="model">city.weather</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">weather.report_city_weather_view</field>
+    <field name="report_file">weather.report_city_weather</field>
+    <field name="binding_model_id"
+      ref="model_city_weather" />
+    <field name="binding_type">report</field>
+  </record>
+
+</odoo>
