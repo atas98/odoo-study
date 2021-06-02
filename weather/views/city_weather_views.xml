@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-  <record id="weather_weather_form_view" model="ir.ui.view">
+  <!-- Form view -->
+  <record id="weather_weather_form_view"
+    model="ir.ui.view">
     <field name="name">weather.form</field>
     <field name="model">city.weather</field>
-    <field name="arch" type="xml">
+    <field name="arch"
+      type="xml">
       <form string="Add weather">
         <header>
-          <field name="state" widget="statusbar" clickable="1" />
+          <field name="state"
+            widget="statusbar"
+            clickable="1" />
         </header>
         <sheet>
-          <group col="2" string="General">
+          <group col="2"
+            string="General">
             <group>
               <field name="city" />
             </group>
@@ -18,14 +24,17 @@
               <field name="date" />
             </group>
           </group>
-          <group col="2" string="Temperature">
+          <group col="2"
+            string="Temperature">
             <group>
               <field name="temperature_c" />
               <field name="temperature_f" />
             </group>
             <group>
-              <field name="uom_temperature_c" string="Unit of Measure" />
-              <field name="uom_temperature_f" string="Unit of Measure" />
+              <field name="uom_temperature_c"
+                string="Unit of Measure" />
+              <field name="uom_temperature_f"
+                string="Unit of Measure" />
             </group>
           </group>
           <group string="Humidity">
@@ -36,49 +45,100 @@
     </field>
   </record>
 
-
-  <record model="ir.ui.view" id="weather_weather_tree_view">
+  <!-- Tree view -->
+  <record model="ir.ui.view"
+    id="weather_weather_tree_view">
     <field name="name">weather.tree</field>
     <field name="model">city.weather</field>
-    <field name="arch" type="xml">
+    <field name="arch"
+      type="xml">
       <tree>
-        <field name="state" invisible="True" />
+        <field name="state"
+          invisible="True" />
         <field name="city" />
         <field name="date" />
         <field name="humidity" />
         <field name="temperature_c" />
-        <field name="uom_temperature_c" string="UoM" />
+        <field name="uom_temperature_c"
+          string="UoM" />
         <field name="temperature_f" />
-        <field name="uom_temperature_f" string="UoM" />
+        <field name="uom_temperature_f"
+          string="UoM" />
       </tree>
     </field>
   </record>
 
-
-  <record model="ir.ui.view" id="weather_weather_search_view">
+  <!-- Search view -->
+  <record model="ir.ui.view"
+    id="weather_weather_search_view">
     <field name="name">weather.search</field>
     <field name="model">city.weather</field>
-    <field name="arch" type="xml">
+    <field name="arch"
+      type="xml">
       <search>
-        <field name="city" string="City" />
-        <field name="date" string="Date" />
-        <group expand="0" string="Group By">
-          <filter name="groupby_city" string="City" context="{'group_by': 'city'}" />
-          <filter name="groupby_state" string="State" context="{'group_by': 'state'}" />
-          <filter name="groupby_date" string="Date" domain="[]" context="{'group_by': 'date'}" />
+        <field name="city"
+          string="City" />
+        <field name="date"
+          string="Date" />
+        <group expand="0"
+          string="Group By">
+          <filter name="groupby_city"
+            string="City"
+            context="{'group_by': 'city'}" />
+          <filter name="groupby_state"
+            string="State"
+            context="{'group_by': 'state'}" />
+          <filter name="groupby_date"
+            string="Date"
+            domain="[]"
+            context="{'group_by': 'date'}" />
         </group>
-        <filter name="temperature_minus" domain="[('temperature_c' ,'&lt;', 0)]" />
-        <filter name="temperature_plus" domain="[('temperature_c' ,'&gt;', 0)]" />
+        <filter name="temperature_minus"
+          domain="[('temperature_c' ,'&lt;', 0)]" />
+        <filter name="temperature_plus"
+          domain="[('temperature_c' ,'&gt;', 0)]" />
       </search>
     </field>
   </record>
 
+  <!-- Pivot view -->
+  <record model="ir.ui.view"
+    id="weather_weather_pivot_view">
+    <field name="name">weather.pivot</field>
+    <field name="model">city.weather</field>
+    <field name="arch"
+      type="xml">
+      <pivot string="Weather"
+        disable_linking="True">
+        <field name="date" type="col" interval="day" />
+        <field name="city" type="row" />
+        <field name="temperature_c" type="measure" />
+        <field name="temperature_f" type="measure" />
+        <field name="humidity" type="measure" />
+      </pivot>
+    </field>
+  </record>
+
+  <!-- Graph view -->
+  <record model="ir.ui.view"
+    id="weather_weather_graph_view">
+    <field name="name">weather.graph</field>
+    <field name="model">city.weather</field>
+    <field name="arch"
+      type="xml">
+      <graph string="Weather" type="line" stacked="False">
+        <field name="date" type="col" />
+        <field name="temperature_c" type="measure" />
+      </graph>
+    </field>
+  </record>
 
   <!-- action opening views on models -->
-  <record model="ir.actions.act_window" id="weather_weather_act">
+  <record model="ir.actions.act_window"
+    id="weather_weather_act">
     <field name="name">Weather</field>
     <field name="res_model">city.weather</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">tree,form,pivot,graph</field>
     <field name="context">{"search_default_groupby_city": 1}</field>
   </record>
 

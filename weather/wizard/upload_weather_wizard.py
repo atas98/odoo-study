@@ -36,7 +36,7 @@ class UploadWeather(models.TransientModel):
                                        'upload_weather_wizard_id')
 
     def _check_city_date_uniqueness(self, city, date):
-        return bool(self.env["city.weather"].search([
+        return bool(self.env["city.weather"].search_count([
             '&',
             ('city.name', '=', city),
             ('date', '=', date)
@@ -145,7 +145,6 @@ class UploadWeather(models.TransientModel):
 
         ukraine = self.env.ref('base.ua')
         ResCity = self.env['res.city']
-        WeatherLine = self.env['upload.weather.wizard.line']
         CityWeather = self.env['city.weather']
 
         for line in self.weather_line_ids:
@@ -168,7 +167,7 @@ class UploadWeather(models.TransientModel):
                 'temperature_c': temperature_c
             })
         # Remove processed lines
-        self.weather_line_ids.filtered(lambda r: r.can_load == True).unlink()
+        self.weather_line_ids.filtered(lambda r: r.can_load).unlink()
 
         self.uploaded = True
         return {

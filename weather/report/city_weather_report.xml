@@ -6,11 +6,14 @@
       <t t-call="web.external_layout">
         <div class="page">
           <h2>
-            <span t-esc="user.name" />
+            <span class="text-muted">User:</span>
+            <span class="display-4" t-esc="user.name" />
           </h2>
-          <h3>
+          <h4>
+            <span class="text-muted">Report created on:</span>
             <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m-%d-%Y')" />
-          </h3>
+          </h4>
+          <br />
           <table class="table table-condensed"
             style="border: 3px;">
             <thead>
