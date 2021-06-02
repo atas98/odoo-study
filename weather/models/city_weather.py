@@ -38,6 +38,7 @@ class Weather(models.Model):
                                         default=_get_default_uom_temperature_c)
     temperature_f = fields.Float(readonly=True,
                                  compute='_compute_fahrenheit_temperature',
+                                 store=True,
                                  string='Fahrenheit',
                                  help='temperature in degrees fahrenheit',
                                  digits='Temperature')
