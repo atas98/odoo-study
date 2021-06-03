@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+  <!-- Form view for upload wizard -->
   <record model="ir.ui.view"
     id="wizard_form_view">
     <field name="name">upload.weather.wizard.form</field>
@@ -44,6 +45,7 @@
     </field>
   </record>
 
+  <!-- Tree view for upload wizard line -->
   <record model="ir.ui.view"
     id="wizard_lines_form_view">
     <field name="name">upload.weather.line.wizard.tree</field>
@@ -60,16 +62,19 @@
         <field name="error_description" />
       </tree>
     </field>
-
   </record>
 
-  <act_window id="weather_upload_weather_wizard_act"
-    name="Upload file"
-    binding_model="city.weather"
-    res_model="upload.weather.wizard"
-    view_mode="form"
-    target="new" />
+  <!-- action opening views on models -->
+  <record model="ir.actions.act_window"
+    id="weather_upload_weather_wizard_act">
+    <field name="name">Upload file</field>
+    <field name="res_model">upload.weather.wizard</field>
+    <field name="binding_model_id" ref="model_city_weather" />
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
 
+  <!-- Menu item for wizard -->
   <menuitem id="weather_upload_wizard_menu_act"
     parent="weather_weather_menu_item"
     name="Upload data"
