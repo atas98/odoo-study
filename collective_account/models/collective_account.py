@@ -11,7 +11,7 @@ class CollectiveAccount(models.Model):
     product_id = fields.Many2one('product.product', required=True)
     total_quantity = fields.Float(default=0)
     total_price = fields.Float(compute='_compute_total_price')
-    
+
     @api.depends('total_quantity')
     def _compute_total_price(self):
         for r in self:
