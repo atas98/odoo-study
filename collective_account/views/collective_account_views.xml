@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- Form view -->
+  <record id="collective_account_form_view"
+    model="ir.ui.view">
+    <field name="name">collective_account.form</field>
+    <field name="model">collective_account.collective_account</field>
+    <field name="arch"
+      type="xml">
+      <form string="Add collective account">
+        <sheet>
+          <group>
+            <field name="partner_id" string="Partner" />
+            <field name="product_id" string="Product" />
+            <field name="total_quantity" />
+            <field name="total_price" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+
+  <!-- Tree view -->
+  <record model="ir.ui.view"
+    id="collective_account_tree_view">
+    <field name="name">collective_account.tree</field>
+    <field name="model">collective_account.collective_account</field>
+    <field name="arch"
+      type="xml">
+      <tree>
+        <field name="product_id"  string="Product" />
+        <field name="total_quantity" string="Total Product QTY" />
+        <field name="total_price" string="Total Product Price" />
+        <field name="partner_id" string="Partner" />
+      </tree>
+    </field>
+  </record>
+
+
+  <!-- Search view -->
+  <record model="ir.ui.view"
+    id="collective_account_search_view">
+    <field name="name">collective_account.search</field>
+    <field name="model">collective_account.collective_account</field>
+    <field name="arch"
+      type="xml">
+      <search>
+        <field name="partner_id"
+          string="Partner" />
+        <field name="product_id"
+          string="Product" />
+        <group expand="0"
+          string="Group By">
+          <filter name="groupby_partner"
+            string="Partner"
+            context="{'group_by': 'partner_id'}" />
+          <filter name="groupby_product"
+            string="Product"
+            context="{'group_by': 'product_id'}" />
+        </group>
+      </search>
+    </field>
+  </record>
+
+
+  <!-- Action -->
+  <record model="ir.actions.act_window"
+    id="collective_account_act">
+    <field name="name">Collective Account</field>
+    <field name="res_model">collective_account.collective_account</field>
+    <field name="view_mode">tree,form</field>
+    <field name="context">{"search_default_groupby_partner": 1,"search_default_groupby_product": 1}</field>
+  </record>
+
+</odoo>
