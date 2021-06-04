@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="collective_account_menu_root"
+    name="Collective Account">
+    <menuitem
+      id="collective_account_menu_act"
+      name="Collective Account"
+      action="collective_account_act" />
+  </menuitem>
+
+</odoo>
