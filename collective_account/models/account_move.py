@@ -18,7 +18,7 @@ class AccountMove(models.Model):
             # Check if collective_account exists
             if collective_account:
                 collective_account.total_quantity = collective_account.total_quantity + \
-                                              line_id.quantity
+                                                    line_id.quantity
             else:
                 CollectiveAccount.create({
                     'partner_id': self.partner_id.id,
