@@ -3,4 +3,4 @@
 # python cache
 __pycache__
 # editor files
-*/.vscode
+.vscode
