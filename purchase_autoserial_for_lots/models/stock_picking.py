@@ -15,10 +15,9 @@ class PurchaseAutoserialForLots(models.Model):
                     # with format [yy][mm][dd]/[3 digit index of todays lines]
                     lines_today_count = StockMove.search_count([
                         ('date', '>=',
-                         fields.Datetime.now().strftime('%Y-%m-%d 00:00:00')
-                         ),
+                         fields.Datetime.now().strftime('%Y-%m-%d 00:00:00')),
                         ('date', '<=',
-                         fields.Datetime.now().strftime('%Y-%m-%d 23:23:59'))
+                         fields.Datetime.now().strftime('%Y-%m-%d 23:59:59'))
                     ])
                     line.lot_name = fields.Datetime.today().strftime(r'%y%m%d') + \
                                     '/' + str(lines_today_count).zfill(3)
