@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="report_invoice_document"
+    inherit_id="account.report_invoice_document">
+    <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_quantity']"
+      position="before">
+      <th name="th_sales_quality"
+        class="text-right">
+        <span>Sales Quality</span>
+      </th>
+    </xpath>
+
+    <xpath expr="//table[@name='invoice_line_table']/tbody/t[@t-foreach='lines']/tr/t/td[@name='account_invoice_line_name']"
+      position="after">
+      <td class="text-right">
+        <span t-field="line.sales_quality" />
+      </td>
+    </xpath>
+  </template>
+
+</odoo>
