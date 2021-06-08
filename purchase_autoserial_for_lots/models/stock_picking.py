@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from datetime import datetime as dt
+from datetime import time as t
 
 
 class PurchaseAutoserialForLots(models.Model):
@@ -15,9 +17,9 @@ class PurchaseAutoserialForLots(models.Model):
                     # with format [yy][mm][dd]/[3 digit index of todays lines]
                     lines_today_count = StockMove.search_count([
                         ('date', '>=',
-                         fields.Datetime.now().strftime('%Y-%m-%d 00:00:00')),
+                         dt.combine(fields.Datetime.now(), t.min)),
                         ('date', '<=',
-                         fields.Datetime.now().strftime('%Y-%m-%d 23:59:59'))
+                         dt.combine(fields.Datetime.now(), t.max)),
                     ])
                     line.lot_name = fields.Datetime.today().strftime(r'%y%m%d') + \
                                     '/' + str(lines_today_count).zfill(3)
