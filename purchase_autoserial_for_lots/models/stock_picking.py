@@ -13,7 +13,7 @@ class PurchaseAutoserialForLots(models.Model):
                 if line.product_id.tracking == 'lot':
                     # Change lot_name to new serial
                     # with format [yy][mm][dd]/[3 digit index of todays lines]
-                    lines_today_count = StockMove.search([
+                    lines_today_count = StockMove.search_count([
                         ('date', '>=',
                          fields.Datetime.now().strftime('%Y-%m-%d 00:00:00')
                          ),
