@@ -1,0 +1,18 @@
+<odoo>
+
+  <!-- system.event action window -->
+  <record id="system_event_action"
+    model="ir.actions.act_window">
+    <field name="name">system.event.action</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">system.event</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Settings > Technical > Event Data -->
+  <menuitem id="menu_tec_event_data"
+    name="System Event"
+    parent="base.menu_custom"
+    action="system_event_action" />
+
+</odoo>

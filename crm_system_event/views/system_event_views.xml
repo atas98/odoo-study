@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- system.event tree view -->
+  <record id="system_event_view_tree"
+    model="ir.ui.view">
+    <field name="name">system.event.view.tree</field>
+    <field name="model">system.event</field>
+    <field name="arch"
+      type="xml">
+      <tree>
+        <field name="event_model_id"
+          string="Event Model" />
+        <field name="create_uid"
+          string="User" />
+        <field name="create_date"
+          string="Creation time" />
+      </tree>
+    </field>
+  </record>
+
+  <!-- system.event form view -->
+  <record id="system_event_view_form"
+    model="ir.ui.view">
+    <field name="name">system.event.view.form</field>
+    <field name="model">system.event</field>
+    <field name="arch"
+      type="xml">
+      <form string="System Event">
+        <sheet>
+          <group>
+            <field name="event_model_id"
+              string="Event Model" />
+            <field name="create_uid"
+              string="User" />
+            <field name="create_date"
+              string="Creation time" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- system.event search view -->
+  <record id="system_event_view_search" model="ir.ui.view">
+    <field name="name">system.event.view.search</field>
+    <field name="model">system.event</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="create_uid" />
+        <field name="create_date" />
+      </search>
+    </field>
+  </record>
+
+</odoo>
