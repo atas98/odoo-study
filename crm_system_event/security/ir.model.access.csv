@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_system_event,system.event,model_system_event,,1,1,1,1
+access_crm_event_data,crm.event.data,model_crm_event_data,,1,1,1,1

@@ -1,0 +1,20 @@
+<odoo>
+
+
+  <!-- system.event action window -->
+  <record id="crm_event_data_action"
+    model="ir.actions.act_window">
+    <field name="name">crm.event.data.action</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">crm.event.data</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- CRM > Event -->
+  <menuitem id="menu_crm_event_data"
+    name="Event Data"
+    parent="crm.crm_menu_root"
+    sequence="23"
+    action="crm_event_data_action" />
+
+</odoo>
