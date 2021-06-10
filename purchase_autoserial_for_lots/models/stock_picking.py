@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from itertools import product
 from odoo import models, fields
 from datetime import datetime as dt
 from datetime import time as t
@@ -19,8 +20,13 @@ class PurchaseAutoserialForLots(models.Model):
                         ('date', '>=', dt.combine(dt.now(), t.min)),
                         ('date', '<=', dt.combine(dt.now(), t.max)),
                     ])
-                    if not line.lot_name:
-                        line.lot_name = fields.Datetime.today().strftime(r'%y%m%d') + \
-                                        '/' + str(lines_today_count).zfill(3)
+                    if not line.lot_id:
+                        new_serial = dt.today().strftime(r'%y%m%d') + \
+                                     '/' + str(lines_today_count).zfill(3)
+                        line.lot_id = self.env['stock.production.lot'].create({
+                            'name': new_serial,
+                            'product_id': line.product_id.id,
+                            'company_id': line.company_id.id
+                        }).id
 
         return super(PurchaseAutoserialForLots, self).button_validate()

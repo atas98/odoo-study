@@ -36,6 +36,18 @@
             <field name="create_date"
               string="Creation time" />
           </group>
+          <group attrs="{'invisible': [('old_user_id', '==', False)]}">
+            <field name="old_user_id"
+              string="Old user" />
+            <field name="new_user_id"
+              string="New user" />
+          </group>
+          <group attrs="{'invisible': [('old_stage_id', '==', False)]}">
+            <field name="old_stage_id"
+              string="Old stage" />
+            <field name="new_stage_id"
+              string="New stage" />
+          </group>
         </sheet>
       </form>
     </field>
