@@ -20,3 +20,26 @@ class Lead(models.Model):
 
         return result
 
+    def write(self, vals):
+        # Create event if stage changes
+        if 'stage_id' in vals:
+            # Create system event
+            self.env['crm.event.data'].create({
+                'system_event_id': self.env['system.event'].create({
+                    'event_model_id': self.id
+                }).id,
+                'old_stage_id': self.stage_id.id,
+                'new_stage_id': vals['stage_id']
+            })
+
+        # Create event if salesperson changes
+        if 'user_id' in vals:
+            self.env['crm.event.data'].create({
+                'system_event_id': self.env['system.event'].create({
+                    'event_model_id': self.id
+                }).id,
+                'old_user_id': self.user_id.id,
+                'new_user_id': vals['user_id']
+            })
+        
+        return super(Lead, self).write(vals)
