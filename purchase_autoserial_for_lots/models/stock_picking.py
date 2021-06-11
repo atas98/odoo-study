@@ -15,14 +15,18 @@ class PurchaseAutoserialForLots(models.Model):
 
         for picking in self:
             for line in picking.move_line_ids:
-                if not line.product_id.tracking == 'lot' or line.lot_id:
+                lot_id_exists = picking.move_line_ids.search_count([
+                    '&', ('product_id', '=', line.product_id.id), '|',
+                    ('lot_id', '!=', False), ('lot_name', '!=', False)
+                ])
+                if not line.product_id.tracking == 'lot' or lot_id_exists:
                     continue
 
                 # Change lot_name to new serial
                 # with format [yy][mm][dd]/[3 digit index of todays lines]
                 lines_today_count = StockMove.search_count([
                     ('date', '>=', dt.combine(dt.now(), t.min)),
-                    ('date', '<=', dt.combine(dt.now(), t.max)),
+                    ('date', '<=', dt.combine(dt.now(), t.max))
                 ])
                 new_serial = dt.today().strftime(r'%y%m%d') + \
                                 '/' + str(lines_today_count).zfill(3)
