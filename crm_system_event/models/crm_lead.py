@@ -25,25 +25,20 @@ class Lead(models.Model):
         CRMEventData = self.env['crm.event.data']
         SystemEvent = self.env['system.event']
 
-        # Create event if stage changes
-        if 'stage_id' in vals:
-            # Create system event
+        old_stage = self.stage_id
+        old_user = self.user_id
+        result = super(Lead, self).write(vals)
+
+        # Create system event
+        if old_user or old_stage:
             CRMEventData.create({
                 'system_event_id': SystemEvent.create({
                     'event_model_id': self.id
                 }).id,
-                'old_stage_id': self.stage_id.id,
-                'new_stage_id': vals['stage_id']
+                'old_stage_id': old_stage.id if 'stage_id' in vals else None,
+                'new_stage_id': vals.get('stage_id'),
+                'old_user_id': old_user.id if 'user_id' in vals else None,
+                'new_user_id': vals.get('user_id')
             })
 
-        # Create event if salesperson changes
-        if 'user_id' in vals:
-            CRMEventData.create({
-                'system_event_id': SystemEvent.create({
-                    'event_model_id': self.id
-                }).id,
-                'old_user_id': self.user_id.id,
-                'new_user_id': vals['user_id']
-            })
-
-        return super(Lead, self).write(vals)
+        return result
