@@ -1,6 +1,5 @@
 <odoo>
 
-
   <!-- system.event action window -->
   <record id="crm_event_data_action"
     model="ir.actions.act_window">
